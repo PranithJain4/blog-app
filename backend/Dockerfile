@@ -1,20 +1,19 @@
-FROM maven:3.9.9-eclipse-temurin-21 AS build
-
-WORKDIR /app
-
-# Copy project
-COPY . .
-
-# Build using system Maven (NOT mvnw)
-RUN mvn clean package -DskipTests
-
-# ---- Runtime image ----
+# Java 21
 FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
 
-COPY --from=build /app/target/backend-0.0.1-SNAPSHOT.jar app.jar
+# Install Maven manually
+RUN apt-get update && apt-get install -y maven
 
+# Copy project files
+COPY . .
+
+# Build using Maven (NOT mvnw)
+RUN mvn clean package -DskipTests
+
+# Expose Spring Boot port
 EXPOSE 8080
 
-CMD ["java", "-jar", "app.jar"]
+# Run the app
+CMD ["java", "-jar", "target/backend-0.0.1-SNAPSHOT.jar"]
