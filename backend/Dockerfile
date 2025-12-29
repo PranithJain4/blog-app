@@ -1,13 +1,14 @@
-# Use Java 21 (matches your pom.xml)
 FROM eclipse-temurin:21-jdk
 
-# Set working directory
 WORKDIR /app
 
-# Copy Maven wrapper and pom
+# Copy everything
 COPY . .
 
-# Build the application
+# Give execute permission to mvnw
+RUN chmod +x mvnw
+
+# Build the Spring Boot app
 RUN ./mvnw clean package -DskipTests
 
 # Expose port
