@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Login - Blog App</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    body {
+      background-image: url("./blog-wall-1.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      backdrop-filter: blur(2px);
+    }
+  </style>
+
+</head>
+
+<body class="bg-background-light font-display">
+
+  <div class="relative flex h-screen overflow-hidden items-center justify-center">
+
+    <!-- Login Box -->
+    <div class="relative bg-white/90 backdrop-blur-md w-full max-w-md rounded-2xl shadow-2xl p-10">
+
+      <h1 class="text-[#0d171b] text-center text-3xl font-bold">Welcome Back</h1>
+      <p class="text-gray-500 text-center mt-1 mb-6">Login to continue your journey</p>
+
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Email / Username</label>
+          <input id="email" class="w-full rounded-lg p-3 bg-gray-100 focus:ring-2 ring-primary" type="text" required />
+        </div>
+
+        <div>
+          <label class="block text-gray-700 font-medium mb-1">Password</label>
+          <input id="password" class="w-full rounded-lg p-3 bg-gray-100 focus:ring-2 ring-primary" type="password" required />
+        </div>
+
+        <button class="w-full h-12 bg-blue-500 text-white font-bold rounded-full mt-4 hover:bg-blue-600 transition">
+          Login
+        </button>
+      </form>
+
+      <p class="text-sm text-gray-600 mt-4 text-center">
+        Don’t have an account?
+        <a href="signup.html" class="text-blue-600 font-semibold hover:underline">
+          Sign Up
+        </a>
+      </p>
+
+      <p id="errorMessage" class="text-red-500 mt-3 text-center hidden">⚠️ Invalid Credentials</p>
+
+    </div>
+  </div>
+
+
+  <!-- JavaScript to Handle Login -->
+  <script>
+  const form = document.getElementById("loginForm");
+  const errorMsg = document.getElementById("errorMessage");
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+      const response = await fetch("http://localhost:8080/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        errorMsg.classList.remove("hidden");
+        return;
+      }
+
+      const data = await response.json();
+    // save username and token in localStorage/session
+      localStorage.setItem("username", data.username);
+      sessionStorage.setItem("token", data.token);
+      window.location.href = "home.html";
+    } catch (error) {
+      console.error("Login Error:", error);
+      errorMsg.classList.remove("hidden");
+    }
+  });
+  </script>
+
+</body>
+
+</html>

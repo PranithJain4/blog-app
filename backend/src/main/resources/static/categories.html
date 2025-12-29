@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Categories - BlogApp</title>
+
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        primary: "#3B82F6",
+        "background-light": "#f6f7f8",
+        "background-dark": "#101c22",
+      },
+      fontFamily: {
+        display: ["Plus Jakarta Sans"],
+      },
+    },
+  },
+}
+</script>
+
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;
+}
+</style>
+
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+
+<div class="flex min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white dark:bg-background-dark dark:border-r dark:border-gray-700 p-4 shadow-lg flex flex-col justify-between">
+    <div>
+      <div class="flex items-center gap-3 mb-8">
+        <span class="material-symbols-outlined text-primary text-3xl">hub</span>
+        <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">BlogApp</h1>
+      </div>
+
+      <nav class="flex flex-col gap-2">
+        <a href="home.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/20 hover:text-primary text-gray-700 dark:text-gray-300">
+          <span class="material-symbols-outlined">home</span> Home
+        </a>
+        <a href="category.html" class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary font-bold">
+          <span class="material-symbols-outlined">explore</span> Categories
+        </a>
+        
+      </nav>
+
+      <button onclick="location.href='upload.html'"
+        class="mt-6 w-full flex items-center justify-center gap-2 h-12 px-4 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition">
+        <span class="material-symbols-outlined">add_circle</span> Upload Blog
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8">
+    <div class="max-w-5xl mx-auto">
+      <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        Explore Categories
+      </h2>
+
+      <!-- Grid -->
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        
+        <!-- CATEGORY CARD TEMPLATE -->
+        <!-- Copy with new text + bg-image for each -->
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/tech.webp');">
+          Technology
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/lifestyle.webp');">
+          Lifestyle
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/business.webp');">
+          Business
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/travel.webp');">
+          Travel
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/food.webp');">
+          Food & Drink
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/sports.webp');">
+          Sports
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/politics.webp');">
+          Politics
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/cinema.webp');">
+          Cinema
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/celebrity.webp');">
+          Celebrity
+        </div>
+
+        <div class="bg-cover bg-center h-40 rounded-xl shadow-lg flex items-end p-4 text-white font-bold hover:scale-105 transition"
+          style="background-image:url('https://vzamurgyxnibtxnllydi.supabase.co/storage/v1/object/public/blog-images/nature.webp');">
+          Nature
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

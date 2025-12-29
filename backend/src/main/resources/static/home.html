@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>BlogApp Home</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: "#3B82F6",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101c22",
+            "text-light": "#1F2937",
+            "text-dark": "#F3F4F6",
+          },
+          fontFamily: {
+            display: ["Plus Jakarta Sans", "sans-serif"],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display">
+
+  <div class="flex min-h-screen">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white dark:bg-background-dark dark:border-r dark:border-gray-700 p-4 flex flex-col justify-between shadow-lg">
+      <div>
+        <div class="flex items-center gap-3 mb-8">
+          <span class="material-symbols-outlined text-primary text-3xl">hub</span>
+          <h1 class="text-2xl font-bold text-text-light dark:text-text-dark">BlogApp</h1>
+        </div>
+
+        <nav class="flex flex-col gap-2">
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/20 text-primary font-bold" href="#">
+            <span class="material-symbols-outlined">home</span> Home
+          </a>
+
+          <a class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-primary/20 hover:text-primary text-text-light dark:text-text-dark"
+            href="categories.html">
+            <span class="material-symbols-outlined">explore</span> Categories
+          </a>
+        </nav>
+
+        <a href="upload.html" class="block w-full mt-6 bg-primary text-white font-bold py-3 rounded-lg text-center hover:bg-primary/90 transition">
+          <span class="material-symbols-outlined">add_circle</span> Upload Blog
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 overflow-y-auto p-10">
+      <div id="posts-container" class="max-w-6xl mx-auto space-y-10 text-text-light dark:text-text-dark text-center">
+        <p class="text-gray-400">Loading posts...</p>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- FETCH POSTS FROM BACKEND -->
+  <script>
+    async function loadPosts() {
+      try {
+        const res = await fetch("http://localhost:8080/api/posts");
+        const posts = await res.json();
+
+        const container = document.getElementById("posts-container");
+        container.innerHTML = ""; 
+
+        if (posts.length === 0) {
+          container.innerHTML = `
+            <p class="text-gray-500 mt-20 text-lg italic">No blog posts yet — Create your first post! ✨</p>`;
+          return;
+        }
+
+        posts.forEach(post => {
+          container.innerHTML += `
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-xl overflow-hidden transition">
+              ${post.imageUrl ? `<img src="${post.imageUrl}" class="w-full h-80 object-cover" />` : ""}
+              <div class="px-6 py-4 text-left">
+                <h3 class="text-2xl font-bold">${post.title}</h3>
+                <p class="text-gray-600 dark:text-gray-300 mt-2">${post.content}</p>
+                <p class="text-sm text-gray-500 mt-3"> User: ${post.author}</p>
+
+              </div>
+            </div>
+          `;
+        });
+
+      } catch (error) {
+        console.error(error);
+        document.getElementById("posts-container").innerHTML =
+          `<p class="text-red-500">Failed to load posts 😢</p>`;
+      }
+    }
+
+    loadPosts();
+  </script>
+
+</body>
+
+</html>
