@@ -81,7 +81,7 @@ async function uploadPost() {
     const formData = new FormData();
     formData.append("file", file);
 
-    const uploadRes = await fetch("http://localhost:8080/api/upload/image", {
+    const uploadRes = await fetch("/api/upload/image", {
       method: "POST",
       body: formData
     });
@@ -101,7 +101,7 @@ async function uploadPost() {
       categoryName: document.querySelector("#postCategory option:checked").text
     };
 
-    const postRes = await fetch("http://localhost:8080/api/posts", {
+    const postRes = await fetch("/api/posts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(postBody)
